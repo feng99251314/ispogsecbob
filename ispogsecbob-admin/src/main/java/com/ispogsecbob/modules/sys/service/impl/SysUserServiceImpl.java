@@ -147,6 +147,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		return baseMapper.updateState(userId, status);
 	}
 
+
+
 	/**
 	 * 检查角色是否越权
 	 */

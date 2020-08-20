@@ -1,13 +1,13 @@
 package com.ispogsecbob.modules.fabric.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
 import com.ispogsecbob.common.utils.Constant;
 import com.ispogsecbob.common.utils.HttpClientUtils;
 import com.ispogsecbob.modules.sys.entity.SysUserEntity;
+import com.ispogsecbob.modules.sys.service.SysUserService;
 import com.ispogsecbob.modules.util.*;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -21,6 +21,8 @@ import com.ispogsecbob.modules.fabric.service.EntFabricFileService;
 import com.ispogsecbob.common.utils.PageUtils;
 import com.ispogsecbob.common.utils.R;
 import org.springframework.web.multipart.MultipartFile;
+import proof.Node;
+import proof.ProofUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +43,9 @@ public class EntFabricFileController {
 
     @Autowired
     private EntFabricFileService entFabricFileService;
+
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 列表
@@ -105,6 +110,7 @@ public class EntFabricFileController {
      * @return
      */
     @PostMapping(value = "/upload")
+//    @RequiresPermissions("enterprise:fabric:save")
     public Object uploadFile(@RequestParam("file") List<MultipartFile> files, @RequestParam("userId") Long userId) {
 
         String UPLOAD_FILES_PATH = Constant.SAVE_BLOCK_CHAIN_FILE_PATH + RandomUtils.getRandomNums() + "/";
@@ -147,20 +153,28 @@ public class EntFabricFileController {
 
         EntFabricFileEntity entFabricFileEntity = null;
 
+        String proof = null;
+
         try {
             String sha_256 = JasyptUtils.getSHA_256(file.getInputStream());
+
             entFabricFileEntity = entFabricFileService.findBySHA256(sha_256);
 
-            HashMap<String, String> params = new HashMap<>();
-            params.put("hash",sha_256);
-            //TODO:向区块链系统发送请求查询数据是否存在
-            HttpClientUtils.doPost(Constant.BLOCK_CHAIN_CHECK_REQUEST_URL,params);
+            if (entFabricFileEntity!=null) {
 
+                SysUserEntity sysUserEntity = sysUserService.selectById(entFabricFileEntity.getUserId());
+
+                proof = new ProofUtils().verifyProof(Node.valueOf(("CA"+(sysUserEntity.getFabricNodeType()+1))), sysUserEntity.getUserId().toString(), sha_256);
+            }
         } catch (Exception e) {
+
             e.printStackTrace();
+
+            return R.error(e.getMessage());
+
         }
 
-        return R.ok().put("entFabricFileEntity", entFabricFileEntity);
+        return R.ok().put("entFabricFileEntity", proof!=null?entFabricFileEntity:null);
     }
 
     /**
@@ -174,25 +188,40 @@ public class EntFabricFileController {
 
     /**
      * 更新审核状态
-     *
-     * @param fabricFileId
+     * @param params
+     * @return
+     * @throws Exception
      */
     @PostMapping(value = "/apply")
-    public R apply(@RequestBody() Integer fabricFileId) {
+    public R apply(@RequestParam Map<String, Object> params) throws Exception {
 
-        EntFabricFileEntity fabricFileEntity = entFabricFileService.selectById(fabricFileId);
+        Object id = params.get("id");
+        Object userId = params.get("userId");
+
+        EntFabricFileEntity fabricFileEntity = entFabricFileService.selectById(Integer.parseInt(id.toString()));
 
         fabricFileEntity.setStatus(fabricFileEntity.getStatus() + 1);
 
+        SysUserEntity sysUserEntity = sysUserService.selectById(Integer.parseInt(userId.toString()));
+
+        fabricFileEntity.setAllowUser(fabricFileEntity.getAllowUser()+"CA"+sysUserEntity.getFabricNodeType().toString()+userId+"|");
+
         entFabricFileService.updateById(fabricFileEntity);
 
+        String saveProofRes = null;
+
         if (fabricFileEntity.getStatus() >= Constant.NUMBER_OF_CONSENSUS) {
-            //TODO:存入区块链系统
+            SysUserEntity userEntity = sysUserService.selectById(fabricFileEntity.getId());
+            //存入区块链系统
             logger.info("存证信息存入区块链系统|" + fabricFileEntity.toString());
             //
-            HttpClientUtils.doGet(Constant.BLOCK_CHAIN_SAVE_REQUEST_URL);
+            saveProofRes = new ProofUtils().saveProof(Node.valueOf("CA"+userEntity.getFabricNodeType().toString()), userEntity.getUserId().toString(), fabricFileEntity.getFileTime().toString(), fabricFileEntity.getFilePath(), fabricFileEntity.getFileHash(), fabricFileEntity.getUserId().toString());
         }
 
-        return R.ok();
+        return R.ok().put("saveProfres",saveProofRes);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Node.valueOf("CA1"));
     }
 }

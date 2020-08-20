@@ -11,6 +11,12 @@
         <el-button v-if="isAuth('enterprise:fabric:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
+    <el-card>
+      <el-radio-group v-model="hasApply" @change="getDataList">
+        <el-radio label="1">我的存证</el-radio>
+        <el-radio label="2">存证列表</el-radio>
+      </el-radio-group>
+    </el-card>
     <el-table
       :data="dataList"
       border
@@ -80,7 +86,7 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button  v-if="isAuth('enterprise:fabric:apply')" type="text" size="small" @click="applyHandle(scope.row.id)">审核</el-button>
+          <el-button  v-if="checkProPermissions(scope.row)" type="text" size="small" @click="applyHandle(scope.row.id)">审核</el-button>
           <el-button v-if="scope.row.userId === userId" type="text" size="small" @click="deleteHandle(scope.row.id)">删除</el-button>
           <el-button v-else-if="scope.row.userId != userId" type="text" size="small">无权限</el-button>
         </template>
@@ -110,6 +116,7 @@
         dataForm: {
           key: ''
         },
+        hasApply: '1',
         userId: this.$store.state.user.id,
         dataList: [],
         pageIndex: 1,
@@ -138,7 +145,9 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'key': this.dataForm.key,
+            'hasApply': this.hasApply,
+            'userId': this.userId
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -211,6 +220,20 @@
           })
         })
       },
+      // 检查权限
+      checkProPermissions (item) {
+        console.log(item)
+        let user = this.$store.state.user.fabricNodeType
+        console.log(user)
+        if (this.isAuth('enterprise:fabric:apply')) {
+          if (item.allowUser !== null ? item.allowUser.indexOf(user) === -1 : true) {
+            if (item.sysUserEntity.fabricNodeType !== user) {
+              return true
+            }
+          }
+        }
+        return false
+      },
       // 审核
       applyHandle (id) {
         this.$confirm(`确定对其审核操作?`, '提示', {
@@ -221,7 +244,10 @@
           this.$http({
             url: this.$http.adornUrl('/enterprise/fabric/apply'),
             method: 'post',
-            data: this.$http.adornData(id, false)
+            params: this.$http.adornParams({
+              'id': id,
+              'userId': this.$store.state.user.id
+            })
           }).then(({data}) => {
             if (data && data.code === 0) {
               this.$message({
@@ -236,6 +262,24 @@
               this.$message.error(data.msg)
             }
           })
+          // this.$http({
+          //   url: this.$http.adornUrl('/enterprise/fabric/apply'),
+          //   method: 'post',
+          //   params: this.$http.adornParams({'id': id, 'userId': this.$store.state.user.id})
+          // }).then(({data}) => {
+          //   if (data && data.code === 0) {
+          //     this.$message({
+          //       message: '操作成功',
+          //       type: 'success',
+          //       duration: 1500,
+          //       onClose: () => {
+          //         this.getDataList()
+          //       }
+          //     })
+          //   } else {
+          //     this.$message.error(data.msg)
+          //   }
+          // })
         })
       }
     }

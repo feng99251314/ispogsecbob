@@ -37,7 +37,10 @@ public class EntFabricFileServiceImpl extends ServiceImpl<EntFabricFileDao, EntF
         EntityWrapper<EntFabricFileEntity> ew = new EntityWrapper<>();
 
         if (params.get("key")!=null)ew.like("file_name",params.get("key").toString());
-        if (params.get("userId")!=null)ew.like("user_id",params.get("userId").toString());
+        //查询自己
+        if ("1".equals(params.get("hasApply")))ew.eq("user_id",params.get("userId"));
+        //查询可以审批
+        if ("2".equals(params.get("hasApply")))ew.where("user_id != {0}",params.get("userId"));
 
         Page<EntFabricFileEntity> page = this.selectPage(
                 new Query<EntFabricFileEntity>(params).getPage(),

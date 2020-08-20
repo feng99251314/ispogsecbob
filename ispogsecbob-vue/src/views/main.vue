@@ -71,6 +71,7 @@
             this.loading = false
             this.userId = data.user.userId
             this.userName = data.user.username
+            this.$store.state.user.fabricNodeType = data.user.fabricNodeType
             this.$store.state.user.username = data.user.username
             this.$store.state.user.name = data.user.name
             this.$store.state.user.instituteId = data.user.instituteId

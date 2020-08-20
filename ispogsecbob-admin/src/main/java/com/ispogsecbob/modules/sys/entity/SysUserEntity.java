@@ -3,9 +3,13 @@ package com.ispogsecbob.modules.sys.entity;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.handlers.EnumTypeHandler;
 import com.ispogsecbob.common.validator.group.AddGroup;
 import com.ispogsecbob.common.validator.group.UpdateGroup;
 import lombok.Data;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.type.MappedTypes;
+import proof.Node;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -91,4 +95,21 @@ public class SysUserEntity implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+
+	/**
+	 * 区块链秘钥
+	 */
+	private String fabricKey;
+
+	/**
+	 * 证书
+	 */
+	private String fabricCert;
+
+	/**
+	 * 区块链用户类型
+	 */
+	private Integer fabricNodeType;
+
 }

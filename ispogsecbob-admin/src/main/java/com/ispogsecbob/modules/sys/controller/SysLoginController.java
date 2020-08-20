@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import proof.Node;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -136,16 +138,20 @@ public class SysLoginController extends AbstractController {
 			//判断用户注册类型
 			Long type = Long.parseLong((String) params.get("type"));
 			if (1 == type){//项目负责人
+				//区块链组织类型
+				user.setFabricNodeType(Node.CA1.ordinal());
 				longList.add(2L);
 				longList.add(11L);
 				user.setRoleIdList(longList);
 				user.setInstituteId(Long.parseLong(params.get("instituteId").toString()));
 			}else if(2 == type){//指导老师
+				user.setFabricNodeType(Node.CA1.ordinal());
 				longList.add(3L);
 				longList.add(12L);
 				user.setRoleIdList(longList);
 				user.setInstituteId(Long.parseLong(params.get("instituteId").toString()));
-			}else if (3 == type){
+			}else if (3 == type){//企业
+				user.setFabricNodeType(Node.CA4.ordinal());
 				longList.add(7L);
 				user.setRoleIdList(longList);
 			}

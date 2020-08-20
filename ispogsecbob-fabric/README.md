@@ -1,11 +1,12 @@
-# Fabric Application
+# Fabric NetWork
 
 ## 构建网络
 
 1.下载相关镜像及其二进制文件
 
 `curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.8 1.4.8 0.4.21`
-curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.2 1.4.2 0.4.15
+
+`curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.2 1.4.2 0.4.15`
 
 或者
 
@@ -14,7 +15,7 @@ curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.2 1.4.2 0.4.15
 2.配置环境变量
 
 ```
-
+将二进制可执行文件加入PATH环境变量
 ```
 
 3.启动网络

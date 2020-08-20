@@ -56,4 +56,8 @@ public class EntFabricFileEntity implements Serializable {
 	 */
 	@TableField(exist = false)
 	private SysUserEntity sysUserEntity;
+	/**
+	 * 已经审批的用户类型+id
+	 */
+	private String allowUser;
 }

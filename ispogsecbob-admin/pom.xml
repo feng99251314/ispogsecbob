@@ -217,13 +217,13 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.5.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.12</version>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.ispogsecbob</groupId>
+            <artifactId>ispogsecbob-proof</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<finalName>${artifactId}</finalName>
