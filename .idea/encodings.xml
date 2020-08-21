@@ -3,7 +3,9 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ispogsecbob-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ispogsecbob-explorer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ispogsecbob-fabric" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ispogsecbob-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ispogsecbob-proof" charset="UTF-8" />
   </component>
 </project>

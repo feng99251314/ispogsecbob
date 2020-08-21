@@ -10,6 +10,8 @@ import org.hyperledger.fabric_ca.sdk.HFCAClient;
 import org.hyperledger.fabric_ca.sdk.RegistrationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import proof.util.Constant;
+import proof.util.Node;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -38,7 +40,7 @@ public class ProofUtils {
         String res = null;
 
         // Load an existing wallet holding identities used to access the network.
-        Path walletDirectory = Paths.get("wallet");
+        Path walletDirectory = Paths.get("/home/mikey/DATA/MIKEY/IDEAWorkSpace/ispogsecbob/wallet");
 
         logger.info("加载钱包 ["+username+"]");
 
@@ -79,14 +81,15 @@ public class ProofUtils {
     /**
      * 保存凭证
      */
-    public String saveProof(Node node,String username ,String time, String filePath, String hashCode, String owner) throws Exception {
+    public String saveProof(Node node, String username , String time, String filePath, String hashCode, String owner) throws Exception {
 
         String res = null;
 
         logger.info("加载钱包");
 
         // Load an existing wallet holding identities used to access the network.
-        Path walletDirectory = Paths.get("wallet");
+//        Path walletDirectory = Paths.get("wallet");
+        Path walletDirectory = Paths.get("/home/mikey/DATA/MIKEY/IDEAWorkSpace/ispogsecbob/wallet");
 
         Wallet wallet = Wallet.createFileSystemWallet(walletDirectory);
 
@@ -146,7 +149,7 @@ public class ProofUtils {
 
             System.out.println("\"admin\" needs to be enrolled and added to the wallet first");
 
-            enroolAdmin(node);
+//            enroolAdmin(node);
 
         }
 
@@ -252,19 +255,30 @@ public class ProofUtils {
 
 //      //ca1
 //
-//        proofUtils.enroolAdmin(proof.Node.CA1);
-//        proofUtils.registerUser(proof.Node.CA1,"user11");
-//        proofUtils.saveProof(proof.Node.CA1,"user11","user11","user11","user11","user11");
-//        proofUtils.verifyProof(proof.Node.CA1,"user11","user11");
+//        proofUtils.enroolAdmin(Node.CA1);
+//        proofUtils.registerUser(Node.CA1,"222");
+//        proofUtils.saveProof(Node.CA1,"user5","user1","user1","user1","user1");
+//        proofUtils.verifyProof(Node.CA1,"user5","user1");
 //
 //      //ca2
 //
-//        proofUtils.enroolAdmin(proof.Node.CA2);
-//        proofUtils.registerUser(proof.Node.CA2,"user3");
-//        proofUtils.saveProof(proof.Node.CA2,"user3","user3","user3","user3","user3");
-        proofUtils.verifyProof(Node.CA1,"1011","user3");
+//        proofUtils.enroolAdmin(proof.util.Node.CA2);
+//        proofUtils.registerUser(Node.CA2,"user2");
+//        proofUtils.saveProof(Node.CA2,"user2","user2","user2","0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb","user2");
+        proofUtils.verifyProof(Node.CA2,"user2","0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb");
 
+//      //ca3
 
-//        proofUtils.registerUser(Node.CA1,"1101");
+//        proofUtils.enroolAdmin(proof.util.Node.CA3);
+//        proofUtils.registerUser(proof.util.Node.CA3,"user3");
+//        proofUtils.saveProof(Node.CA3,"user3","user3","user3","user3","user3");
+//        proofUtils.verifyProof(Node.CA3,"user3","user3");
+
+//      //ca4
+
+//        proofUtils.enroolAdmin(proof.util.Node.CA4);
+//        proofUtils.registerUser(proof.util.Node.CA4,"user4");
+//        proofUtils.saveProof(Node.CA4,"user4","user4","user4","user4","user4");
+//        proofUtils.verifyProof(Node.CA4,"user4","user4");
     }
 }

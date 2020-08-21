@@ -12,4 +12,5 @@
     </modules>
     <packaging>pom</packaging>
 	<description>war包对应的pom，打war包，执行【mvn clean package -f pom-war.xml】</description>
+
 </project>

@@ -2,6 +2,7 @@
   <el-dialog
     :title="'账号/密码找回'"
     :close-on-click-modal="false"
+    width="400px"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px" status-icon>
       <el-form-item label="手机号码" prop="userName">

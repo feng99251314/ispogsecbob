@@ -141,15 +141,16 @@
             this.dataForm = res.entFabricFileEntity
             this.resultVisible = true
             this.$notify({
-              title: '成功',
+              title: '提示',
               message: '验证成功',
               type: 'success'
             })
           } else {
             this.checkNotFoundVisible = true
-            this.$notify.error({
-              title: '错误',
-              message: '存证系统未存在该记录'
+            this.$notify({
+              title: '提示',
+              message: '存证系统未存在该记录',
+              type: 'success'
             })
           }
         } else {

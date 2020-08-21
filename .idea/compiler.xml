@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ispogsecbob-proof" />
+        <module name="ispogsecbob-explorer" />
         <module name="ispogsecbob-admin" />
         <module name="ispogsecbob-generator" />
       </profile>
@@ -17,6 +18,7 @@
       <module name="ispogsecbob" target="1.5" />
       <module name="ispogsecbob-admin" target="1.8" />
       <module name="ispogsecbob-admin (1)" target="1.5" />
+      <module name="ispogsecbob-explorer" target="1.8" />
       <module name="ispogsecbob-fabric" target="1.8" />
       <module name="ispogsecbob-generator" target="1.8" />
       <module name="ispogsecbob-proof" target="1.8" />
@@ -27,8 +29,10 @@
       <module name="innovate-admin" options="-parameters" />
       <module name="ispogsecbob" options="-parameters" />
       <module name="ispogsecbob-admin" options="-parameters" />
+      <module name="ispogsecbob-explorer" options="-parameters" />
       <module name="ispogsecbob-fabric" options="-parameters" />
       <module name="ispogsecbob-generator" options="-parameters" />
+      <module name="ispogsecbob-proof" options="" />
     </option>
   </component>
 </project>

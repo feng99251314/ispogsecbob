@@ -1,15 +1,12 @@
 package com.ispogsecbob.modules.fabric.controller;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.*;
 
 import com.ispogsecbob.common.utils.Constant;
-import com.ispogsecbob.common.utils.HttpClientUtils;
 import com.ispogsecbob.modules.sys.entity.SysUserEntity;
 import com.ispogsecbob.modules.sys.service.SysUserService;
 import com.ispogsecbob.modules.util.*;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +18,7 @@ import com.ispogsecbob.modules.fabric.service.EntFabricFileService;
 import com.ispogsecbob.common.utils.PageUtils;
 import com.ispogsecbob.common.utils.R;
 import org.springframework.web.multipart.MultipartFile;
-import proof.Node;
+import proof.util.Node;
 import proof.ProofUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -149,7 +146,7 @@ public class EntFabricFileController {
      * @return
      */
     @PostMapping(value = "/check")
-    public Object check(@RequestParam("file") MultipartFile file) {
+    public R check(@RequestParam("file") MultipartFile file) {
 
         EntFabricFileEntity entFabricFileEntity = null;
 
@@ -164,8 +161,12 @@ public class EntFabricFileController {
 
                 SysUserEntity sysUserEntity = sysUserService.selectById(entFabricFileEntity.getUserId());
 
+                //0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb
+
                 proof = new ProofUtils().verifyProof(Node.valueOf(("CA"+(sysUserEntity.getFabricNodeType()+1))), sysUserEntity.getUserId().toString(), sha_256);
+
             }
+
         } catch (Exception e) {
 
             e.printStackTrace();

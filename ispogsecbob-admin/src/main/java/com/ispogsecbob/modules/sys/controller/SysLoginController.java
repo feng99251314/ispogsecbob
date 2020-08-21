@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import proof.Node;
+import proof.util.Node;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
