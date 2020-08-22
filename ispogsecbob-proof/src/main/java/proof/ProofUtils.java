@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import proof.util.Constant;
 import proof.util.Node;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,12 +36,12 @@ public class ProofUtils {
     /**
      * 验证凭证
      */
-    public String verifyProof(Node node ,String username ,String hashCode) throws Exception {
+    public String verify(Node node ,String username ,String hashCode) throws Exception {
 
         String res = null;
 
         // Load an existing wallet holding identities used to access the network.
-        Path walletDirectory = Paths.get("/home/mikey/DATA/MIKEY/IDEAWorkSpace/ispogsecbob/wallet");
+        Path walletDirectory = Paths.get("wallet");
 
         logger.info("加载钱包 ["+username+"]");
 
@@ -50,7 +51,7 @@ public class ProofUtils {
 
         if (!userExists) {
             System.out.println("An identity for the user ["+username+"] not exists in the wallet Now register");
-            registerUser(node,username);
+            register(node,username);
         }
 
         Path networkConfigFile = Paths.get(Constant.getConnectionFile(node));
@@ -81,7 +82,7 @@ public class ProofUtils {
     /**
      * 保存凭证
      */
-    public String saveProof(Node node, String username , String time, String filePath, String hashCode, String owner) throws Exception {
+    public String save(Node node, String username , String time, String filePath, String hashCode, String owner) throws Exception {
 
         String res = null;
 
@@ -89,7 +90,7 @@ public class ProofUtils {
 
         // Load an existing wallet holding identities used to access the network.
 //        Path walletDirectory = Paths.get("wallet");
-        Path walletDirectory = Paths.get("/home/mikey/DATA/MIKEY/IDEAWorkSpace/ispogsecbob/wallet");
+        Path walletDirectory = Paths.get("wallet");
 
         Wallet wallet = Wallet.createFileSystemWallet(walletDirectory);
 
@@ -121,7 +122,7 @@ public class ProofUtils {
     /**
      * 注册用户
      */
-    public void registerUser(Node node,String username) throws Exception {
+    public void register(Node node,String username) throws Exception {
 
 
         // Create a CA client for interacting with the CA.
@@ -133,7 +134,9 @@ public class ProofUtils {
         caClient.setCryptoSuite(cryptoSuite);
 
         // Create a wallet for managing identities
+
         Wallet wallet = Wallet.createFileSystemWallet(Paths.get("wallet"));
+//        Wallet wallet = Wallet.createInMemoryWallet();
 
         // Check to see if we've already enrolled the user.
         boolean userExists = wallet.exists(username);
@@ -206,6 +209,10 @@ public class ProofUtils {
         registrationRequest.setEnrollmentID(username);
         String enrollmentSecret = caClient.register(registrationRequest, admin);
         Enrollment enrollment = caClient.enroll(username, enrollmentSecret);
+
+        System.out.println("cert="+enrollment.getCert());
+        System.out.println("key="+enrollment.getKey());
+
         Wallet.Identity user = Wallet.Identity.createIdentity(Constant.getMspId(node), enrollment.getCert(), enrollment.getKey());
         wallet.put(username, user);
         System.out.println("Successfully enrolled user ["+username+"] and imported it into the wallet");
@@ -217,7 +224,7 @@ public class ProofUtils {
      * 注册管理员
      * @throws Exception
      */
-    public void enroolAdmin(Node node) throws Exception {
+    public void enrool(Node node) throws Exception {
         // Create a CA client for interacting with the CA.
 
         HFCAClient caClient = HFCAClient.createNewInstance(Constant.getCAUrl(node), Constant.getCAProperties(node));
@@ -255,17 +262,17 @@ public class ProofUtils {
 
 //      //ca1
 //
-//        proofUtils.enroolAdmin(Node.CA1);
-//        proofUtils.registerUser(Node.CA1,"222");
-//        proofUtils.saveProof(Node.CA1,"user5","user1","user1","user1","user1");
-//        proofUtils.verifyProof(Node.CA1,"user5","user1");
+//        proofUtils.enrool(Node.CA1);
+//        proofUtils.register(Node.CA1,"user1");
+        proofUtils.save(Node.CA1,"user1","user1","user1","user1","user1");
+        proofUtils.verify(Node.CA1,"user1","user1");
 //
 //      //ca2
 //
 //        proofUtils.enroolAdmin(proof.util.Node.CA2);
 //        proofUtils.registerUser(Node.CA2,"user2");
 //        proofUtils.saveProof(Node.CA2,"user2","user2","user2","0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb","user2");
-        proofUtils.verifyProof(Node.CA2,"user2","0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb");
+//        proofUtils.verifyProof(Node.CA2,"user2","0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb");
 
 //      //ca3
 
