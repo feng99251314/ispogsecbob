@@ -8,21 +8,17 @@
 package routers
 
 import (
-	"hello/controllers"
+	"ispogsecbob-api/controllers"
 
 	"github.com/astaxie/beego"
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
-		beego.NSNamespace("/object",
+	ns := beego.NewNamespace("/api",
+
+		beego.NSNamespace("/fabric",
 			beego.NSInclude(
-				&controllers.ObjectController{},
-			),
-		),
-		beego.NSNamespace("/user",
-			beego.NSInclude(
-				&controllers.UserController{},
+				&controllers.EntFabricFileController{},
 			),
 		),
 	)
