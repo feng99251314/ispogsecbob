@@ -1,5 +1,11 @@
 # 区块链API服务
 
+## run 
+
+````jshelllanguage
+bee run -gendoc=true -downdoc=true
+````
+
 http://localhost:8080/swagger/
 
 # \[注意]

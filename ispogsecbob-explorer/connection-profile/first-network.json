@@ -4,15 +4,15 @@
 	"client": {
 		"tlsEnable": true,
 		"adminCredential": {
-			"id": "admin",
-			"password": "adminpw"
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
 		},
 		"enableAuthentication": true,
 		"organization": "Org1MSP",
 		"connection": {
 			"timeout": {
 				"peer": {
-					"endorser": "600"
+					"endorser": "300"
 				},
 				"orderer": "300"
 			}
@@ -37,13 +37,10 @@
 	"organizations": {
 		"Org1MSP": {
 			"mspid": "Org1MSP",
-			"fullpath": true,
 			"adminPrivateKey": {
-				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/81fa00a60126c18ea43f109587e62073210108abad8295c8413449f63361dde6_sk"
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/75188db466c6261b636c9fe76d4fa89a1091eda0d3c6023c4811d0d4870898e8_sk"
 			},
-			"peers": [
-				"peer0.org1.example.com"
-			],
+			"peers": ["peer0.org1.example.com"],
 			"signedCert": {
 				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem"
 			}

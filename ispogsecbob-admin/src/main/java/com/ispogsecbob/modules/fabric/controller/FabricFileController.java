@@ -3,7 +3,10 @@ package com.ispogsecbob.modules.fabric.controller;
 import java.io.File;
 import java.util.*;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ispogsecbob.common.utils.Constant;
+import com.ispogsecbob.common.utils.HttpClientUtils;
 import com.ispogsecbob.modules.sys.entity.SysUserEntity;
 import com.ispogsecbob.modules.sys.service.SysUserService;
 import com.ispogsecbob.modules.util.*;
@@ -48,7 +51,7 @@ public class FabricFileController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("enterprise:fabric:list")
+//    @RequiresPermissions("enterprise:fabric:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = entFabricFileService.queryPage(params);
 
@@ -163,7 +166,9 @@ public class FabricFileController {
 
                 //0dacee6571e7b8e3dd0cf3f8940ab484a9807ade5a7655ea049d33c15bb8d5fb
 
+//                JSONObject post = HttpClientUtils.Post("http://localhost:8088/api/fabric/verify", (JSONObject) JSON.toJSON(entFabricFileEntity));
 
+//                logger.info(post.toString());
             }
 
         } catch (Exception e) {
@@ -214,14 +219,16 @@ public class FabricFileController {
             SysUserEntity userEntity = sysUserService.selectById(fabricFileEntity.getId());
             //存入区块链系统
             logger.info("存证信息存入区块链系统|" + fabricFileEntity.toString());
-            //
-            saveProofRes = new ProofUtils().saveProof(Node.valueOf("CA"+userEntity.getFabricNodeType().toString()), userEntity.getUserId().toString(), fabricFileEntity.getFileTime().toString(), fabricFileEntity.getFilePath(), fabricFileEntity.getFileHash(), fabricFileEntity.getUserId().toString());
+            //设置角色
+            fabricFileEntity.setAllowUser(userEntity.getFabricNodeType().toString());
+            //保存
+//            JSONObject post = HttpClientUtils.Post("http://localhost:8088/api/fabric/save", (JSONObject) JSON.toJSON(fabricFileEntity));
+
+//            logger.info(post.toString());
         }
 
         return R.ok().put("saveProfres",saveProofRes);
     }
 
-    public static void main(String[] args) {
-        System.out.println(Node.valueOf("CA1"));
-    }
+
 }

@@ -48,8 +48,8 @@ services:
     volumes:
       - ./config.json:/opt/explorer/app/platform/fabric/config.json
       - ./connection-profile:/opt/explorer/app/platform/fabric/connection-profile
-      - ./organizations:/tmp/crypto
-      - walletstore:/opt/wallet
+      - ../ispogsecbob-fabric/network/crypto-config:/tmp/crypto
+      - ../ispogsecbob-api/wallet:/opt/wallet
     command: sh -c "node /opt/explorer/main.js && tail -f /dev/null"
     ports:
       - 8080:8080
