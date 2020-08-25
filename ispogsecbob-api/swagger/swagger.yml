@@ -1,135 +1,57 @@
 swagger: "2.0"
 info:
-  title: beego Test API
-  description: beego has a very cool tools to autogenerate documents for your API
+  title: 区块链存证系统服务调用 API
+  description: 区块链存证系统服务调用 API
   version: 1.0.0
-  termsOfService: http://beego.me/
+  termsOfService: https://mikeygithub.github.io/
   contact:
-    email: astaxie@gmail.com
+    email: biaogejiushibiao@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 basePath: /api
 paths:
-  /fabric/:
-    get:
-      tags:
-      - fabric
-      description: get EntFabricFile
-      operationId: EntFabricFileController.Get All
-      parameters:
-      - in: query
-        name: query
-        description: Filter. e.g. col1:v1,col2:v2 ...
-        type: string
-      - in: query
-        name: fields
-        description: Fields returned. e.g. col1,col2 ...
-        type: string
-      - in: query
-        name: sortby
-        description: Sorted-by fields. e.g. col1,col2 ...
-        type: string
-      - in: query
-        name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
-        type: string
-      - in: query
-        name: limit
-        description: Limit the size of result set. Must be an integer
-        type: string
-      - in: query
-        name: offset
-        description: Start position of result set. Must be an integer
-        type: string
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.EntFabricFile'
-        "403":
-          description: ""
+  /fabric/save:
     post:
       tags:
       - fabric
-      description: create EntFabricFile
-      operationId: EntFabricFileController.Post
+      description: Save FabricFile to BlockChain
+      operationId: FabricFileController.Save
       parameters:
       - in: body
         name: body
-        description: body for EntFabricFile content
+        description: body for FabricFile content
         required: true
         schema:
-          $ref: '#/definitions/models.EntFabricFile'
+          $ref: '#/definitions/models.FabricFile'
       responses:
         "201":
-          description: '{int} models.EntFabricFile'
+          description: '{int} models.FabricFile'
         "403":
           description: body is empty
-  /fabric/{id}:
-    get:
+  /fabric/verify:
+    post:
       tags:
       - fabric
-      description: get EntFabricFile by id
-      operationId: EntFabricFileController.Get One
+      description: verify FabricFile from BlockChain by hashcode
+      operationId: FabricFileController.Verify
       parameters:
-      - in: path
-        name: id
-        description: The key for staticblock
-        required: true
-        type: string
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.EntFabricFile'
-        "403":
-          description: :id is empty
-    put:
-      tags:
-      - fabric
-      description: update the EntFabricFile
-      operationId: EntFabricFileController.Put
-      parameters:
-      - in: path
-        name: id
-        description: The id you want to update
-        required: true
-        type: string
       - in: body
         name: body
-        description: body for EntFabricFile content
+        description: body for FabricFile content
         required: true
         schema:
-          $ref: '#/definitions/models.EntFabricFile'
+          $ref: '#/definitions/models.FabricFile'
       responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.EntFabricFile'
+        "201":
+          description: '{int} models.FabricFile'
         "403":
-          description: :id is not int
-    delete:
-      tags:
-      - fabric
-      description: delete the EntFabricFile
-      operationId: EntFabricFileController.Delete
-      parameters:
-      - in: path
-        name: id
-        description: The id you want to delete
-        required: true
-        type: string
-      responses:
-        "200":
-          description: '{string} delete success!'
-        "403":
-          description: id is empty
+          description: body is empty
 definitions:
-  models.EntFabricFile:
-    title: EntFabricFile
+  models.FabricFile:
+    title: FabricFile
     type: object
 tags:
 - name: fabric
   description: |
-    EntFabricFileController operations for EntFabricFile
+    FabricFileController operations for FabricFile

@@ -1,8 +1,8 @@
 // @APIVersion 1.0.0
-// @Title beego Test API
-// @Description beego has a very cool tools to autogenerate documents for your API
-// @Contact astaxie@gmail.com
-// @TermsOfServiceUrl http://beego.me/
+// @Title 区块链存证系统服务调用 API
+// @Description 区块链存证系统服务调用 API
+// @Contact biaogejiushibiao@gmail.com
+// @TermsOfServiceUrl https://mikeygithub.github.io/
 // @License Apache 2.0
 // @LicenseUrl http://www.apache.org/licenses/LICENSE-2.0.html
 package routers
@@ -18,7 +18,7 @@ func init() {
 
 		beego.NSNamespace("/fabric",
 			beego.NSInclude(
-				&controllers.EntFabricFileController{},
+				&controllers.FabricFileController{},
 			),
 		),
 	)

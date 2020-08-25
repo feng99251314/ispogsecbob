@@ -17,15 +17,15 @@ organizations:
     - ca.org4.example.com
 peers:
   peer0.org4.example.com:
-    url: grpcs://localhost:13051
+    url: grpcs://peer0.org4.example.com:13051
     tlsCACerts:
-      path: crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
+      path: ../ispogsecbob-fabric/network/crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
     grpcOptions:
       ssl-target-name-override: peer0.org4.example.com
   peer1.org4.example.com:
-    url: grpcs://localhost:14051
+    url: grpcs://peer1.org4.example.com:14051
     tlsCACerts:
-      path: crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
+      path: ../ispogsecbob-fabric/network/crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
     grpcOptions:
       ssl-target-name-override: peer1.org4.example.com
 certificateAuthorities:
@@ -33,6 +33,6 @@ certificateAuthorities:
     url: https://localhost:10054
     caName: ca-org4
     tlsCACerts:
-      path: crypto-config/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
+      path: ../ispogsecbob-fabric/network/crypto-config/peerOrganizations/org4.example.com/ca/ca.org4.example.com-cert.pem
     httpOptions:
       verify: false

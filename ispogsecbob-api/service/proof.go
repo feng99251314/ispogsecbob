@@ -34,7 +34,6 @@ func main() {
 
 	ccpPath := filepath.Join(
 		"..",
-		"..",
 		"ispogsecbob-fabric",
 		"network",
 		"connection",
@@ -59,20 +58,21 @@ func main() {
 
 	contract := network.GetContract("mycc")
 
-	result, err := contract.EvaluateTransaction("verify", "user2")
+	//result, err := contract.EvaluateTransaction("verify", "user2")
+	//if err != nil {
+	//	fmt.Printf("Failed to evaluate transaction: %s\n", err)
+	//	os.Exit(1)
+	//}
+	//fmt.Println("hello")
+	//fmt.Println(string(result))
+
+	result, err := contract.EvaluateTransaction("verify", "CAR10")
+	result, err = contract.SubmitTransaction("deposit", "user3", "user3", "user3", "user3", "user3")
 	if err != nil {
 		fmt.Printf("Failed to evaluate transaction: %s\n", err)
 		os.Exit(1)
 	}
 	fmt.Println(string(result))
-
-	////result, err := contract.EvaluateTransaction("verify","CAR10")
-	//result, err = contract.SubmitTransaction("deposit", "user2","user2","user2","user2","user2")
-	//if err != nil {
-	//	fmt.Printf("Failed to evaluate transaction: %s\n", err)
-	//	os.Exit(1)
-	//}
-	//fmt.Println(string(result))
 	//
 	//result, err = contract.EvaluateTransaction("verify","user2")
 	//if err != nil {
@@ -111,7 +111,6 @@ func main() {
 
 func populateWallet(wallet *gateway.Wallet) error {
 	credPath := filepath.Join(
-		"..",
 		"..",
 		"ispogsecbob-fabric",
 		"network",

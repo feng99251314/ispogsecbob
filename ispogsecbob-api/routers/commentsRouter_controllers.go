@@ -7,47 +7,20 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"],
+	beego.GlobalControllerRouter["ispogsecbob-api/controllers:FabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:FabricFileController"],
 		beego.ControllerComments{
-			Method:           "Post",
-			Router:           "/",
+			Method:           "Save",
+			Router:           "/save",
 			AllowHTTPMethods: []string{"post"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"],
+	beego.GlobalControllerRouter["ispogsecbob-api/controllers:FabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:FabricFileController"],
 		beego.ControllerComments{
-			Method:           "GetAll",
-			Router:           "/",
-			AllowHTTPMethods: []string{"get"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"],
-		beego.ControllerComments{
-			Method:           "GetOne",
-			Router:           "/:id",
-			AllowHTTPMethods: []string{"get"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"],
-		beego.ControllerComments{
-			Method:           "Put",
-			Router:           "/:id",
-			AllowHTTPMethods: []string{"put"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"] = append(beego.GlobalControllerRouter["ispogsecbob-api/controllers:EntFabricFileController"],
-		beego.ControllerComments{
-			Method:           "Delete",
-			Router:           "/:id",
-			AllowHTTPMethods: []string{"delete"},
+			Method:           "Verify",
+			Router:           "/verify",
+			AllowHTTPMethods: []string{"post"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
 			Params:           nil})
