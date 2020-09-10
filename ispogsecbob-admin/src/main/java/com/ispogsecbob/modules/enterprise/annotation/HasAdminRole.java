@@ -3,9 +3,8 @@ package com.ispogsecbob.modules.enterprise.annotation;
 import java.lang.annotation.*;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 管理员角色判断拦截注解
  * @date 2019/10/22
  */

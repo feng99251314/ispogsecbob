@@ -6,9 +6,8 @@ import com.ispogsecbob.common.enums.LimitPageEnumsKey;
 import java.lang.annotation.*;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 页面分页数据拦截注解
  * @date 2019/10/23
  */

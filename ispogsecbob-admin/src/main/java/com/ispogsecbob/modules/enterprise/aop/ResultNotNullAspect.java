@@ -13,9 +13,8 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 返回值结果非空处理
  * @date 2019/9/24
  */

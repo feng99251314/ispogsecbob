@@ -11,8 +11,8 @@ import java.util.Map;
 /**
  * 项目信息表
  *
- * @author mozhifan
- * @email 1217567927@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-09-10 22:19:50
  */
 public interface EntProjectInfoService extends IService<EntProjectInfoEntity> {

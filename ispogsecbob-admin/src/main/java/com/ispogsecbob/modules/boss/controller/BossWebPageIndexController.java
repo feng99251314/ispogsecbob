@@ -22,9 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 前端主页面控制器
  * @date 2019/10/15
  */

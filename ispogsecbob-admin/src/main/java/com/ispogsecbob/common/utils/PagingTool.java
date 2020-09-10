@@ -1,9 +1,8 @@
 package com.ispogsecbob.common.utils;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 自定义分页拦截工具
  * @date 2019/10/9
  */

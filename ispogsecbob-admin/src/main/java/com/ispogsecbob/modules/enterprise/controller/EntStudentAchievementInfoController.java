@@ -22,8 +22,8 @@ import com.ispogsecbob.common.utils.R;
 
 /**
  * 学生所获奖励/证书信息表
- * @author soldier
- * @email 583403411@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-10-11 20:55:46
  */
 @RestController

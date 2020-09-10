@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 企业基本信息表
  * 
- * @author 莫智帆
- * @email 1217567927@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-09-10 22:18:36
  */
 @Mapper

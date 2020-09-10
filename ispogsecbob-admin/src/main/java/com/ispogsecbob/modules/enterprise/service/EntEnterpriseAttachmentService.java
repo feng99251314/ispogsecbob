@@ -10,8 +10,8 @@ import java.util.Map;
 /**
  * 企业附件表
  *
- * @author 莫智帆
- * @email 1217567927@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-09-10 22:18:36
  */
 public interface EntEnterpriseAttachmentService extends IService<EntEnterpriseAttachmentEntity> {

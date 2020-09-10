@@ -1,9 +1,8 @@
 package com.ispogsecbob.common.enums;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description 分页拦截键的枚举类
  * @date 2019/10/23
  */

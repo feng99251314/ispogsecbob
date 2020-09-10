@@ -18,9 +18,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description Aop企业入驻权限拦截
  * @date 2019/9/24
  */

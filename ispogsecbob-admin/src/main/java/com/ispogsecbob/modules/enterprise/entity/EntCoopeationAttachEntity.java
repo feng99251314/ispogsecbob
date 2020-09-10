@@ -9,8 +9,8 @@ import lombok.Data;
 /**
  * 合作附件表
  * 
- * @author 莫智帆
- * @email 1625017540@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-11-12 15:45:44
  */
 @Data

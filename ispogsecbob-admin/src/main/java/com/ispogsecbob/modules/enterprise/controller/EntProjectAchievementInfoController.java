@@ -26,8 +26,8 @@ import static com.ispogsecbob.common.utils.ShiroUtils.getUserId;
 /**
  * 项目成果信息表
  *
- * @author 莫智帆
- * @email 1217567927@qq.com
+ * @author 麦奇
+ * @email biaogejiushibiao@outlook.com
  * @date 2019-09-10 22:18:36
  */
 @RestController

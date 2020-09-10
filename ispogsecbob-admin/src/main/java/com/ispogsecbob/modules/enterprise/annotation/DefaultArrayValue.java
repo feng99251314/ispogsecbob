@@ -5,9 +5,8 @@ import com.ispogsecbob.common.enums.DefValueEnum;
 import java.lang.annotation.*;
 
 /**
- * @author spring
- * email: 4298293220@qq.com
- * site: https://springbless.xin
+ * @author 麦奇
+ * email: biaogejiushibiao@outlook.com
  * @description Map集合中指定key为空时初始为默认值
  * @date 2019/10/9
  */
